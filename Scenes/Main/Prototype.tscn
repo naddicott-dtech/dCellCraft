@@ -38,10 +38,8 @@ curve = SubResource( 3 )
 position = Vector2( 92, 21 )
 
 [node name="ControlArea1" type="Area2D" parent="GameElements/Player/AmoebaShape/ControlPoint1"]
-position = Vector2( 16, 1 )
 
 [node name="ControlCollision1" type="CollisionShape2D" parent="GameElements/Player/AmoebaShape/ControlPoint1/ControlArea1"]
-position = Vector2( 16, 1 )
 shape = SubResource( 2 )
 
 [node name="ControlSprite1" type="Sprite" parent="GameElements/Player/AmoebaShape/ControlPoint1/ControlArea1"]
@@ -52,10 +50,8 @@ texture = ExtResource( 3 )
 position = Vector2( 151, 47 )
 
 [node name="ControlArea2" type="Area2D" parent="GameElements/Player/AmoebaShape/ControlPoint2"]
-position = Vector2( 21, 0 )
 
 [node name="ControlCollision2" type="CollisionShape2D" parent="GameElements/Player/AmoebaShape/ControlPoint2/ControlArea2"]
-position = Vector2( 19, -1 )
 shape = SubResource( 2 )
 
 [node name="ControlSprite2" type="Sprite" parent="GameElements/Player/AmoebaShape/ControlPoint2/ControlArea2"]
@@ -66,10 +62,8 @@ texture = ExtResource( 3 )
 position = Vector2( 188, 98 )
 
 [node name="ControlArea3" type="Area2D" parent="GameElements/Player/AmoebaShape/ControlPoint3"]
-position = Vector2( 14, -1 )
 
 [node name="ControlCollision3" type="CollisionShape2D" parent="GameElements/Player/AmoebaShape/ControlPoint3/ControlArea3"]
-position = Vector2( 15, 1 )
 shape = SubResource( 2 )
 
 [node name="ControlSprite3" type="Sprite" parent="GameElements/Player/AmoebaShape/ControlPoint3/ControlArea3"]
@@ -80,10 +74,8 @@ texture = ExtResource( 3 )
 position = Vector2( 150, 139 )
 
 [node name="ControlArea4" type="Area2D" parent="GameElements/Player/AmoebaShape/ControlPoint4"]
-position = Vector2( 13, 0 )
 
 [node name="ControlCollision4" type="CollisionShape2D" parent="GameElements/Player/AmoebaShape/ControlPoint4/ControlArea4"]
-position = Vector2( 15, 0 )
 shape = SubResource( 2 )
 
 [node name="ControlSprite4" type="Sprite" parent="GameElements/Player/AmoebaShape/ControlPoint4/ControlArea4"]
@@ -94,10 +86,8 @@ texture = ExtResource( 3 )
 position = Vector2( 92, 154 )
 
 [node name="ControlArea5" type="Area2D" parent="GameElements/Player/AmoebaShape/ControlPoint5"]
-position = Vector2( 13, 0 )
 
 [node name="ControlCollision5" type="CollisionShape2D" parent="GameElements/Player/AmoebaShape/ControlPoint5/ControlArea5"]
-position = Vector2( 15, 0 )
 shape = SubResource( 2 )
 
 [node name="ControlSprite5" type="Sprite" parent="GameElements/Player/AmoebaShape/ControlPoint5/ControlArea5"]
@@ -108,10 +98,8 @@ texture = ExtResource( 3 )
 position = Vector2( 40, 138 )
 
 [node name="ControlArea6" type="Area2D" parent="GameElements/Player/AmoebaShape/ControlPoint6"]
-position = Vector2( 13, 0 )
 
 [node name="ControlCollision6" type="CollisionShape2D" parent="GameElements/Player/AmoebaShape/ControlPoint6/ControlArea6"]
-position = Vector2( 15, 0 )
 shape = SubResource( 2 )
 
 [node name="ControlSprite6" type="Sprite" parent="GameElements/Player/AmoebaShape/ControlPoint6/ControlArea6"]
@@ -125,7 +113,6 @@ position = Vector2( -5, 87 )
 position = Vector2( 13, 0 )
 
 [node name="ControlCollision7" type="CollisionShape2D" parent="GameElements/Player/AmoebaShape/ControlPoint7/ControlArea7"]
-position = Vector2( 15, 0 )
 shape = SubResource( 2 )
 
 [node name="ControlSprite7" type="Sprite" parent="GameElements/Player/AmoebaShape/ControlPoint7/ControlArea7"]
@@ -136,10 +123,8 @@ texture = ExtResource( 3 )
 position = Vector2( 26, 51 )
 
 [node name="ControlArea8" type="Area2D" parent="GameElements/Player/AmoebaShape/ControlPoint8"]
-position = Vector2( 13, 0 )
 
 [node name="ControlCollision8" type="CollisionShape2D" parent="GameElements/Player/AmoebaShape/ControlPoint8/ControlArea8"]
-position = Vector2( 15, 0 )
 shape = SubResource( 2 )
 
 [node name="ControlSprite8" type="Sprite" parent="GameElements/Player/AmoebaShape/ControlPoint8/ControlArea8"]
