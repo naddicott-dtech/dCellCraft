@@ -18,7 +18,7 @@ func add_wavy_points(curve, point1, point2, num_intermediate_points, time):
 		var wavy_point = base_point + offset
 		curve.add_point(wavy_point)
 
-
+#Hi github, I still work!
 func _ready():
 	# Access the AmoebaShape (Path2D) node
 	var amoeba_shape = get_node("AmoebaShape")  # Adjusted the path
