@@ -1,17 +1,17 @@
 extends Node2D
 
-var amplitude = 25.0
-var target_amplitude = 50.0
+var amplitude = 30.0
+var target_amplitude = 40.0
 var amplitude_change_speed = 0.5 # Adjust this for faster or slower transitions
-var frequency = 1.5
-var target_frequency = 2 # This can be adjusted based on your desired effect
+var frequency = 0.7
+var target_frequency = 1.1 # This can be adjusted based on your desired effect
 var frequency_change_speed = 0.2 # Adjust this for faster or slower transitions
 var time_passed = 0.0
-var osc_speed = 0.5
+var osc_speed = 0.1
 var noise = OpenSimplexNoise.new() # Godot has built-in Simplex noise  
-var noise_period = 0.5
+var noise_period = 0.7
 var target_noise_period = 0.8
-var noise_period_change_speed = 0.05 # Adjust this for faster or slower transitions
+var noise_period_change_speed = 0.005 # Adjust this for faster or slower transitions
 																		  
 # Declare curve at class scope
 var curve: Curve2D = null
@@ -26,7 +26,18 @@ func add_wavy_points(curve, point1, point2, num_intermediate_points, time):
 		var wavy_point = base_point + offset
 		curve.add_point(wavy_point)
 
+func _on_ControlArea_control_pressed(control_node):
+	#Here, control-node the the ControlArea that was pressed
+	#We will use this to determine where to start drawing the arrow, etc.
+	print("ControlArea pressed: ", control_node.name)
+
 func _ready():
+	# loop through all the children of the Player node
+	for child in get_children():
+		if child is Area2D and "ControlArea" in child.name:
+			#connect the signals to the Player script
+			child.connect("control_pressed", self, "_on_ControlArea_pressed")
+			child.connect("control_pressed", self, "_on_ControlArea_released")
 	# Access the AmoebaShape (Path2D) node
 	var amoeba_shape = get_node("AmoebaShape")  # Adjusted the path
 	self.z_index = 1  # Set to a higher value than Moving Background
@@ -44,11 +55,6 @@ func _ready():
 	var control_point6 = amoeba_shape.get_node("ControlPoint6").position
 	var control_point7 = amoeba_shape.get_node("ControlPoint7").position
 	var control_point8 = amoeba_shape.get_node("ControlPoint8").position
-	
-	print("Control Point 1: ", control_point1)
-	print("Control Point 2: ", control_point2)
-	print("Control Point 3: ", control_point3)
-	print("Control Point 4: ", control_point4)
 	
 	curve.add_point(control_point1)
 	add_wavy_points(curve, control_point1, control_point2, 3, time_passed)
@@ -71,9 +77,15 @@ func _ready():
 	amoeba_shape.curve = curve
 	update()
 
+
 func _process(delta): 
 	time_passed += delta
 	var amoeba_shape = get_node("AmoebaShape")  # Adjusted the path
+	var change_interval = 10.0 #change target(s) every 10s
+	
+	if fmod(time_passed, change_interval) < delta: #we've just passed an interval
+		target_noise_period = rand_range(0.7, 0.8)
+		# more target shifts here
 	
 	# Adjust amplitude towards target
 	if amplitude < target_amplitude:

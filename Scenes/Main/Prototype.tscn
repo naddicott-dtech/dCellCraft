@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Main/Prototype.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Backgrounds/TerrainSprite_PetriDish_Green.png" type="Texture" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/Main/Player.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Main/ControlArea.gd" type="Script" id=5]
 
 [sub_resource type="Curve2D" id=3]
 _data = {
@@ -38,6 +39,7 @@ curve = SubResource( 3 )
 position = Vector2( 92, 21 )
 
 [node name="ControlArea1" type="Area2D" parent="GameElements/Player/AmoebaShape/ControlPoint1"]
+script = ExtResource( 5 )
 
 [node name="ControlCollision1" type="CollisionShape2D" parent="GameElements/Player/AmoebaShape/ControlPoint1/ControlArea1"]
 shape = SubResource( 2 )
@@ -50,6 +52,7 @@ texture = ExtResource( 3 )
 position = Vector2( 151, 47 )
 
 [node name="ControlArea2" type="Area2D" parent="GameElements/Player/AmoebaShape/ControlPoint2"]
+script = ExtResource( 5 )
 
 [node name="ControlCollision2" type="CollisionShape2D" parent="GameElements/Player/AmoebaShape/ControlPoint2/ControlArea2"]
 shape = SubResource( 2 )
@@ -62,6 +65,7 @@ texture = ExtResource( 3 )
 position = Vector2( 188, 98 )
 
 [node name="ControlArea3" type="Area2D" parent="GameElements/Player/AmoebaShape/ControlPoint3"]
+script = ExtResource( 5 )
 
 [node name="ControlCollision3" type="CollisionShape2D" parent="GameElements/Player/AmoebaShape/ControlPoint3/ControlArea3"]
 shape = SubResource( 2 )
@@ -74,6 +78,7 @@ texture = ExtResource( 3 )
 position = Vector2( 150, 139 )
 
 [node name="ControlArea4" type="Area2D" parent="GameElements/Player/AmoebaShape/ControlPoint4"]
+script = ExtResource( 5 )
 
 [node name="ControlCollision4" type="CollisionShape2D" parent="GameElements/Player/AmoebaShape/ControlPoint4/ControlArea4"]
 shape = SubResource( 2 )
@@ -86,6 +91,7 @@ texture = ExtResource( 3 )
 position = Vector2( 92, 154 )
 
 [node name="ControlArea5" type="Area2D" parent="GameElements/Player/AmoebaShape/ControlPoint5"]
+script = ExtResource( 5 )
 
 [node name="ControlCollision5" type="CollisionShape2D" parent="GameElements/Player/AmoebaShape/ControlPoint5/ControlArea5"]
 shape = SubResource( 2 )
@@ -98,6 +104,7 @@ texture = ExtResource( 3 )
 position = Vector2( 40, 138 )
 
 [node name="ControlArea6" type="Area2D" parent="GameElements/Player/AmoebaShape/ControlPoint6"]
+script = ExtResource( 5 )
 
 [node name="ControlCollision6" type="CollisionShape2D" parent="GameElements/Player/AmoebaShape/ControlPoint6/ControlArea6"]
 shape = SubResource( 2 )
@@ -111,6 +118,7 @@ position = Vector2( -5, 87 )
 
 [node name="ControlArea7" type="Area2D" parent="GameElements/Player/AmoebaShape/ControlPoint7"]
 position = Vector2( 13, 0 )
+script = ExtResource( 5 )
 
 [node name="ControlCollision7" type="CollisionShape2D" parent="GameElements/Player/AmoebaShape/ControlPoint7/ControlArea7"]
 shape = SubResource( 2 )
@@ -123,6 +131,7 @@ texture = ExtResource( 3 )
 position = Vector2( 26, 51 )
 
 [node name="ControlArea8" type="Area2D" parent="GameElements/Player/AmoebaShape/ControlPoint8"]
+script = ExtResource( 5 )
 
 [node name="ControlCollision8" type="CollisionShape2D" parent="GameElements/Player/AmoebaShape/ControlPoint8/ControlArea8"]
 shape = SubResource( 2 )
@@ -142,3 +151,12 @@ polygon = PoolVector2Array( 2.33011, 12.9836, 9.32045, 15.8689, 14.2913, 21.2459
 [node name="GameTimer" type="Timer" parent="."]
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+
+[connection signal="control_pressed" from="GameElements/Player/AmoebaShape/ControlPoint1/ControlArea1" to="GameElements/Player" method="_on_ControlArea_control_pressed"]
+[connection signal="control_pressed" from="GameElements/Player/AmoebaShape/ControlPoint2/ControlArea2" to="GameElements/Player" method="_on_ControlArea_control_pressed"]
+[connection signal="control_pressed" from="GameElements/Player/AmoebaShape/ControlPoint3/ControlArea3" to="GameElements/Player" method="_on_ControlArea_control_pressed"]
+[connection signal="control_pressed" from="GameElements/Player/AmoebaShape/ControlPoint4/ControlArea4" to="GameElements/Player" method="_on_ControlArea_control_pressed"]
+[connection signal="control_pressed" from="GameElements/Player/AmoebaShape/ControlPoint5/ControlArea5" to="GameElements/Player" method="_on_ControlArea_control_pressed"]
+[connection signal="control_pressed" from="GameElements/Player/AmoebaShape/ControlPoint6/ControlArea6" to="GameElements/Player" method="_on_ControlArea_control_pressed"]
+[connection signal="control_pressed" from="GameElements/Player/AmoebaShape/ControlPoint7/ControlArea7" to="GameElements/Player" method="_on_ControlArea_control_pressed"]
+[connection signal="control_pressed" from="GameElements/Player/AmoebaShape/ControlPoint8/ControlArea8" to="GameElements/Player" method="_on_ControlArea_control_pressed"]
