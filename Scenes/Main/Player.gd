@@ -18,6 +18,7 @@ var initial_mouse_position: Vector2 = Vector2()
 var max_impulse_strength: float = 200.0 #Adjust based on your needs
 var impulse_active = false
 var impulse_done_distance = 15.0
+var distance_per_ATP = 20
 var initial_COM = Vector2()
 var previous_COM = Vector2()
   
@@ -25,6 +26,7 @@ var previous_COM = Vector2()
 var curve: Curve2D = null
 onready var arrow = $AmoebaShape/ImpulseArrow
 onready var arrowhead = $AmoebaShape/ArrowHead
+onready var ATPCostLabel = $AmoebaShape/ArrowHead/ATPCostLabel
 var control_points_names = ["ControlPoint1", "ControlPoint2", "ControlPoint3", "ControlPoint4", "ControlPoint5", "ControlPoint6", "ControlPoint7", "ControlPoint8"]
 
 func add_wavy_points(curve, point1, point2, num_intermediate_points, time):
@@ -52,6 +54,8 @@ func update_arrowhead():
 	
 	# Update the Polygon2D points to form the arrowhead
 	arrowhead.polygon = [arrow_end_local, p1, p2]
+	# Update the ATPCostLabel Position
+	ATPCostLabel.rect_position = base_position
 
 func _on_ControlArea_control_pressed(control_node):
 	#Here, control-node the the ControlArea that was pressed
@@ -77,10 +81,18 @@ func _on_ControlArea_control_released(control_node) -> void:
 		if impulse_strength > max_impulse_strength:
 			mouse_delta = mouse_delta.normalized() * max_impulse_strength
 			
+		#Pay the ATP (and limit again if needed)	
+		var ATPCost = mouse_delta.length() / distance_per_ATP
+		if ATPCost > Global.ATP:
+			mouse_delta = (Global.ATP / ATPCost) * mouse_delta
+			Global.ATP = 0
+		else: # have enough to pay
+			Global.ATP -= round(ATPCost)
 		# get the control point and apply the impulse
 		var control_point = control_node.get_parent()
 		control_point.apply_impulse(Vector2(), mouse_delta) #apply the impulse
 		impulse_active = true
+		
 	
 
 func _ready():
@@ -156,10 +168,10 @@ func _process(delta):
 		var mouse_pos = get_global_mouse_position()
 		var last_control_pressed_global = last_control_pressed.global_position
 		var center_of_mass = compute_center_of_mass()
-		var initial_distance = center_of_mass.distance_squared_to(initial_mouse_position)
-		var current_distance = center_of_mass.distance_squared_to(mouse_pos)
-		
+		var initial_distance = center_of_mass.distance_to(initial_mouse_position)
+		var current_distance = center_of_mass.distance_to(mouse_pos)
 		var vector_to_mouse = mouse_pos - last_control_pressed_global
+		var ATPCost = vector_to_mouse.length() / distance_per_ATP
 		
 		# Limit the arrow length to max impulse strength
 		if vector_to_mouse.length() > max_impulse_strength:
@@ -168,6 +180,13 @@ func _process(delta):
 		
 		if current_distance > initial_distance:
 			arrow.show()
+			ATPCostLabel.visible = true
+			ATPCostLabel.text = "- " + str(round(ATPCost)) + " ATP"
+			#Turn Label Red if out of ATP
+			if ATPCost > Global.ATP:
+				ATPCostLabel.add_color_override("font_color", Color(1,  0, 0)) #red
+			else:
+				ATPCostLabel.add_color_override("font_color", Color(1,  1, 1)) #white
 			arrow.global_position = last_control_pressed_global
 			arrow.points = [Vector2(0,0), mouse_pos - last_control_pressed_global]
 			update_arrowhead() # make sure arrowhead position and direction are correct
@@ -176,6 +195,7 @@ func _process(delta):
 #			print("Control Point Global Position: ", last_control_pressed.global_position)
 
 		else:
+			ATPCostLabel.visible = false
 			arrow.hide()
 			arrowhead.hide()
 	else:

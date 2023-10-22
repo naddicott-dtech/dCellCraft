@@ -15,3 +15,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	#update the label to show the current value of Global.ATP
 	self.text = "%s ATP" % Global.ATP
+	if Global.ATP == 0:
+		self.add_color_override("font_color", Color(1,  0, 0)) #red
+	else:
+		self.add_color_override("font_color", Color(1,  1, 1))

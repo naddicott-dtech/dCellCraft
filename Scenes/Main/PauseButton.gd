@@ -19,10 +19,10 @@ func _ready() -> void:
 func _on_PauseButton_pressed() -> void:
 	print("Pause button pressed")
 	if is_paused == false:
-		print("Pausing Game")
+		#print("Pausing Game")
 		get_tree().paused = true
 		is_paused = true
 	else:
-		print("resuming Game")
+		#print("resuming Game")
 		is_paused = false
 		get_tree().paused = false

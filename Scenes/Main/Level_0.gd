@@ -5,7 +5,7 @@ extends Node2D
 # var b = "text"
 
 func _ready():
-	Global.ATP = 50
+	Global.ATP = 700
 
 
 func _process(delta):
@@ -23,5 +23,4 @@ func game_over():
 # Function to handle level completion
 func level_complete():
 	pass
-
 

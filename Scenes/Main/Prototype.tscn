@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Main/Prototype.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Backgrounds/TerrainSprite_PetriDish_Green.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Scenes/Main/PauseButton.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/Main/ATPDisplay.gd" type="Script" id=10]
 [ext_resource path="res://Scenes/Main/ATPMargin.gd" type="Script" id=11]
+[ext_resource path="res://Scenes/Main/ImpulseArrow.gd" type="Script" id=12]
 
 [sub_resource type="Curve2D" id=3]
 _data = {
@@ -70,6 +71,11 @@ width = 6.0
 default_color = Color( 0.898039, 0.901961, 0.87451, 1 )
 
 [node name="ArrowHead" type="Polygon2D" parent="GameElements/CellMembrane/AmoebaShape"]
+script = ExtResource( 12 )
+
+[node name="ATPCostLabel" type="Label" parent="GameElements/CellMembrane/AmoebaShape/ArrowHead"]
+margin_right = 40.0
+margin_bottom = 14.0
 
 [node name="ControlPoint1" type="RigidBody2D" parent="GameElements/CellMembrane/AmoebaShape"]
 position = Vector2( 92, 21 )
