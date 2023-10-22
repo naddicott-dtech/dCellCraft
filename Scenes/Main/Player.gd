@@ -3,9 +3,9 @@ extends Node2D
 var amplitude = 20.0
 var target_amplitude = 25.0
 var amplitude_change_speed = 0.5 # Adjust this for faster or slower transitions
-var frequency = 0.3
-var target_frequency = 0.5 # This can be adjusted based on your desired effect
-var frequency_change_speed = 0.1 # Adjust this for faster or slower transitions
+#var frequency = 0.3
+#var target_frequency = 0.5 # This can be adjusted based on your desired effect
+#var frequency_change_speed = 0.1 # Adjust this for faster or slower transitions
 var time_passed = 0.0
 var osc_speed = 0.1
 var noise = OpenSimplexNoise.new() # Godot has built-in Simplex noise  
@@ -69,7 +69,7 @@ func _on_ControlArea_control_released(control_node) -> void:
 	
 	var initial_distance = center_of_mass.distance_squared_to(initial_mouse_position)
 	var current_distance = center_of_mass.distance_squared_to(mouse_position)
-	if current_distance > initial_distance:
+	if current_distance > initial_distance: #arrow is outside the cell
 		var mouse_delta = mouse_position - initial_mouse_position
 		var impulse_strength = mouse_delta.length()
 		
@@ -185,6 +185,8 @@ func _process(delta):
 	if impulse_active == false:	#make the amoeba more undulating when it's not getting free undulation from movement
 		if fmod(time_passed, change_interval) < delta: #we've just passed an interval
 			target_noise_period = rand_range(0.7, 0.8)
+			target_amplitude = rand_range(20.0, 25.0)
+#			target_frequency = rand_range(0.3, 0.5)
 			# more target shifts here
 	
 		# Adjust amplitude towards target
@@ -198,14 +200,14 @@ func _process(delta):
 				amplitude = target_amplitude
 
 		# Adjust frequency towards target
-		if frequency < target_frequency:
-			frequency += frequency_change_speed * delta
-			if frequency > target_frequency:
-				frequency = target_frequency
-		elif frequency > target_frequency:
-			frequency -= frequency_change_speed * delta
-			if frequency < target_frequency:
-				frequency = target_frequency
+#		if frequency < target_frequency:
+#			frequency += frequency_change_speed * delta
+#			if frequency > target_frequency:
+#				frequency = target_frequency
+#		elif frequency > target_frequency:
+#			frequency -= frequency_change_speed * delta
+#			if frequency < target_frequency:
+#				frequency = target_frequency
 		
 		# Adjust noise period towards target
 		if noise_period < target_noise_period:
@@ -223,14 +225,12 @@ func _process(delta):
 		if fmod(time_passed, change_interval) < delta:		
 			var current_COM = compute_center_of_mass()
 			var distance = current_COM.distance_to(previous_COM)
-			print("distance: %f" % distance)
+			#print("distance: %f" % distance)
 			if distance < impulse_done_distance:
 				impulse_active = false
-				print("impulse over")
+				#print("impulse over")
 			previous_COM = current_COM # compare distance for next time
 		
-
-
 	# Clear the existing points from the curve and re-add them with the new undulation
 	curve.clear_points()
 	
@@ -246,24 +246,6 @@ func _process(delta):
 		curve.add_point(current_point)
 		add_wavy_points(curve, current_point, next_point, 3, time_passed)
 	curve.add_point(control_points_positions[0])
-	
-#	curve.add_point(control_point1)
-#	add_wavy_points(curve, control_point1, control_point2, 3, time_passed)
-#	curve.add_point(control_point2)
-#	add_wavy_points(curve, control_point2, control_point3, 3, time_passed)
-#	curve.add_point(control_point3)
-#	add_wavy_points(curve, control_point3, control_point4, 3, time_passed)
-#	curve.add_point(control_point4)
-#	add_wavy_points(curve, control_point4, control_point5, 3, time_passed)
-#	curve.add_point(control_point5)
-#	add_wavy_points(curve, control_point5, control_point6, 3, time_passed)
-#	curve.add_point(control_point6)
-#	add_wavy_points(curve, control_point6, control_point7, 3, time_passed)
-#	curve.add_point(control_point7)
-#	add_wavy_points(curve, control_point7, control_point8, 3, time_passed)
-#	curve.add_point(control_point8)
-#	add_wavy_points(curve, control_point8, control_point1, 3, time_passed)
-#
 	
 	# Trigger the _draw() method to render the updated curve
 	update()
