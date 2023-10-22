@@ -14,7 +14,8 @@ onready var control_collision = get_node("ControlCollision" + name.replace("Cont
 
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
-		var distance_to_center = event.position.distance_to(control_collision.global_position)
+		var real_pos = get_global_mouse_position()
+		var distance_to_center = real_pos.distance_to(control_collision.global_position)
 		if event.pressed:
 			if distance_to_center <= control_collision.shape.radius:
 				emit_signal("control_pressed", self)
@@ -32,6 +33,7 @@ func _input(event):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# self.set_process_unhandled_key_input(true)
 	connect("mouse_entered", self, "_on_ControlArea_mouse_entered")
 	connect("mouse_exited", self, "_on_ControlArea_mouse_exited")
 	

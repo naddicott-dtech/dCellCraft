@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/Main/Prototype.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Backgrounds/TerrainSprite_PetriDish_Green.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scenes/Main/ControlArea.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Main/OtherOrganelles.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Sprites/TwoReticles_med.png" type="Texture" id=7]
+[ext_resource path="res://Scenes/Main/CustomCamera.gd" type="Script" id=8]
 
 [sub_resource type="Curve2D" id=3]
 _data = {
@@ -362,7 +363,12 @@ position = Vector2( 202, 105 )
 script = ExtResource( 6 )
 
 [node name="Nucleus" type="Sprite" parent="GameElements/OtherOrganelles"]
+visible = false
 texture = ExtResource( 3 )
+
+[node name="CustomCamera" type="Node2D" parent="GameElements"]
+position = Vector2( 202, 105 )
+script = ExtResource( 8 )
 
 [node name="GameTimer" type="Timer" parent="."]
 

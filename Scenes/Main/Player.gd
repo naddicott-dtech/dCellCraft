@@ -106,16 +106,7 @@ func _ready():
 	# get the positions (with a for loop)
 	for name in control_points_names:
 		control_points_positions.append(amoeba_shape.get_node(name).position)
-	# Get the positions of the control points and add them to the curve
-#	var control_point1 = amoeba_shape.get_node("ControlPoint1").position
-#	var control_point2 = amoeba_shape.get_node("ControlPoint2").position
-#	var control_point3 = amoeba_shape.get_node("ControlPoint3").position
-#	var control_point4 = amoeba_shape.get_node("ControlPoint4").position
-#	var control_point5 = amoeba_shape.get_node("ControlPoint5").position
-#	var control_point6 = amoeba_shape.get_node("ControlPoint6").position
-#	var control_point7 = amoeba_shape.get_node("ControlPoint7").position
-#	var control_point8 = amoeba_shape.get_node("ControlPoint8").position
-	
+
 	#add points to the curve (with a for loop)
 	for i in range(control_points_positions.size()):
 		var current_point = control_points_positions[i]
@@ -124,23 +115,6 @@ func _ready():
 		add_wavy_points(curve, current_point, next_point, 3, time_passed)
 	curve.add_point(control_points_positions[0])
 	
-#	curve.add_point(control_point1)
-#	add_wavy_points(curve, control_point1, control_point2, 3, time_passed)
-#	curve.add_point(control_point2)
-#	add_wavy_points(curve, control_point2, control_point3, 3, time_passed)
-#	curve.add_point(control_point3)
-#	add_wavy_points(curve, control_point3, control_point4, 3, time_passed)
-#	curve.add_point(control_point4)
-#	add_wavy_points(curve, control_point4, control_point5, 3, time_passed)
-#	curve.add_point(control_point5)
-#	add_wavy_points(curve, control_point5, control_point6, 3, time_passed)
-#	curve.add_point(control_point6)
-#	add_wavy_points(curve, control_point6, control_point7, 3, time_passed)
-#	curve.add_point(control_point7)
-#	add_wavy_points(curve, control_point7, control_point8, 3, time_passed)
-#	curve.add_point(control_point8)
-#	add_wavy_points(curve, control_point8, control_point1, 3, time_passed)
-#	curve.add_point(control_point1)
 	# Assign the curve to the AmoebaShape (Path2D) node
 	amoeba_shape.curve = curve
 	initial_COM = compute_center_of_mass()
