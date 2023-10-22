@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/Main/Prototype.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Backgrounds/TerrainSprite_PetriDish_Green.png" type="Texture" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/Main/Player.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Main/ControlArea.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Main/OtherOrganelles.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Sprites/TwoReticles_med.png" type="Texture" id=7]
 
 [sub_resource type="Curve2D" id=3]
 _data = {
@@ -23,140 +25,362 @@ script = ExtResource( 1 )
 [node name="MovingBackground" type="Node2D" parent="GameElements"]
 
 [node name="BackgroundImage" type="Sprite" parent="GameElements/MovingBackground"]
-position = Vector2( 490, 449 )
+position = Vector2( 485, 444 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 2 )
 
-[node name="Player" type="Node2D" parent="GameElements"]
+[node name="CellMembrane" type="Node2D" parent="GameElements"]
 position = Vector2( 100, 0 )
 script = ExtResource( 4 )
 
-[node name="AmoebaShape" type="Path2D" parent="GameElements/Player"]
+[node name="AmoebaShape" type="Path2D" parent="GameElements/CellMembrane"]
 position = Vector2( 10, 10 )
 curve = SubResource( 3 )
 
-[node name="ControlPoint1" type="PathFollow2D" parent="GameElements/Player/AmoebaShape"]
+[node name="ImpulseArrow" type="Line2D" parent="GameElements/CellMembrane/AmoebaShape"]
+scale = Vector2( 1, 1 )
+points = PoolVector2Array( 2, 10, 30, 10 )
+width = 6.0
+default_color = Color( 0.898039, 0.901961, 0.87451, 1 )
+
+[node name="ArrowHead" type="Polygon2D" parent="GameElements/CellMembrane/AmoebaShape"]
+
+[node name="ControlPoint1" type="RigidBody2D" parent="GameElements/CellMembrane/AmoebaShape"]
 position = Vector2( 92, 21 )
+gravity_scale = 0.0
 
-[node name="ControlArea1" type="Area2D" parent="GameElements/Player/AmoebaShape/ControlPoint1"]
-script = ExtResource( 5 )
-
-[node name="ControlCollision1" type="CollisionShape2D" parent="GameElements/Player/AmoebaShape/ControlPoint1/ControlArea1"]
+[node name="PhysicsCollision1" type="CollisionShape2D" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint1"]
+scale = Vector2( 3.5, 1 )
 shape = SubResource( 2 )
 
-[node name="ControlSprite1" type="Sprite" parent="GameElements/Player/AmoebaShape/ControlPoint1/ControlArea1"]
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 3 )
+[node name="ControlArea1" type="Area2D" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint1"]
+script = ExtResource( 5 )
 
-[node name="ControlPoint2" type="PathFollow2D" parent="GameElements/Player/AmoebaShape"]
+[node name="ControlCollision1" type="CollisionShape2D" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint1/ControlArea1"]
+shape = SubResource( 2 )
+
+[node name="ControlSprite1" type="Sprite" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint1/ControlArea1"]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 7 )
+hframes = 2
+
+[node name="ControlPoint2" type="RigidBody2D" parent="GameElements/CellMembrane/AmoebaShape"]
 position = Vector2( 151, 47 )
+gravity_scale = 0.0
 
-[node name="ControlArea2" type="Area2D" parent="GameElements/Player/AmoebaShape/ControlPoint2"]
-script = ExtResource( 5 )
-
-[node name="ControlCollision2" type="CollisionShape2D" parent="GameElements/Player/AmoebaShape/ControlPoint2/ControlArea2"]
+[node name="PhysicsCollision2" type="CollisionShape2D" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint2"]
+rotation = 0.785398
+scale = Vector2( 3.5, 1 )
 shape = SubResource( 2 )
 
-[node name="ControlSprite2" type="Sprite" parent="GameElements/Player/AmoebaShape/ControlPoint2/ControlArea2"]
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 3 )
-
-[node name="ControlPoint3" type="PathFollow2D" parent="GameElements/Player/AmoebaShape"]
-position = Vector2( 188, 98 )
-
-[node name="ControlArea3" type="Area2D" parent="GameElements/Player/AmoebaShape/ControlPoint3"]
+[node name="ControlArea2" type="Area2D" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint2"]
 script = ExtResource( 5 )
 
-[node name="ControlCollision3" type="CollisionShape2D" parent="GameElements/Player/AmoebaShape/ControlPoint3/ControlArea3"]
+[node name="ControlCollision2" type="CollisionShape2D" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint2/ControlArea2"]
 shape = SubResource( 2 )
 
-[node name="ControlSprite3" type="Sprite" parent="GameElements/Player/AmoebaShape/ControlPoint3/ControlArea3"]
+[node name="ControlSprite2" type="Sprite" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint2/ControlArea2"]
 scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 3 )
+texture = ExtResource( 7 )
+hframes = 2
 
-[node name="ControlPoint4" type="PathFollow2D" parent="GameElements/Player/AmoebaShape"]
-position = Vector2( 150, 139 )
+[node name="ControlPoint3" type="RigidBody2D" parent="GameElements/CellMembrane/AmoebaShape"]
+position = Vector2( 180, 98 )
+gravity_scale = 0.0
 
-[node name="ControlArea4" type="Area2D" parent="GameElements/Player/AmoebaShape/ControlPoint4"]
+[node name="PhysicsCollision3" type="CollisionShape2D" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint3"]
+rotation = 1.5708
+scale = Vector2( 3.5, 1 )
+shape = SubResource( 2 )
+
+[node name="ControlArea3" type="Area2D" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint3"]
 script = ExtResource( 5 )
 
-[node name="ControlCollision4" type="CollisionShape2D" parent="GameElements/Player/AmoebaShape/ControlPoint4/ControlArea4"]
+[node name="ControlCollision3" type="CollisionShape2D" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint3/ControlArea3"]
 shape = SubResource( 2 )
 
-[node name="ControlSprite4" type="Sprite" parent="GameElements/Player/AmoebaShape/ControlPoint4/ControlArea4"]
+[node name="ControlSprite3" type="Sprite" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint3/ControlArea3"]
 scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 3 )
+texture = ExtResource( 7 )
+hframes = 2
 
-[node name="ControlPoint5" type="PathFollow2D" parent="GameElements/Player/AmoebaShape"]
-position = Vector2( 92, 154 )
+[node name="ControlPoint4" type="RigidBody2D" parent="GameElements/CellMembrane/AmoebaShape"]
+position = Vector2( 150, 150 )
+gravity_scale = 0.0
 
-[node name="ControlArea5" type="Area2D" parent="GameElements/Player/AmoebaShape/ControlPoint5"]
+[node name="PhysicsCollision4" type="CollisionShape2D" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint4"]
+rotation = -0.785398
+scale = Vector2( 3.5, 1 )
+shape = SubResource( 2 )
+
+[node name="ControlArea4" type="Area2D" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint4"]
 script = ExtResource( 5 )
 
-[node name="ControlCollision5" type="CollisionShape2D" parent="GameElements/Player/AmoebaShape/ControlPoint5/ControlArea5"]
+[node name="ControlCollision4" type="CollisionShape2D" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint4/ControlArea4"]
 shape = SubResource( 2 )
 
-[node name="ControlSprite5" type="Sprite" parent="GameElements/Player/AmoebaShape/ControlPoint5/ControlArea5"]
+[node name="ControlSprite4" type="Sprite" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint4/ControlArea4"]
 scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 3 )
+texture = ExtResource( 7 )
+hframes = 2
 
-[node name="ControlPoint6" type="PathFollow2D" parent="GameElements/Player/AmoebaShape"]
+[node name="ControlPoint5" type="RigidBody2D" parent="GameElements/CellMembrane/AmoebaShape"]
+position = Vector2( 92, 165 )
+gravity_scale = 0.0
+
+[node name="PhysicsCollision5" type="CollisionShape2D" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint5"]
+scale = Vector2( 3.5, 1 )
+shape = SubResource( 2 )
+
+[node name="ControlArea5" type="Area2D" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint5"]
+script = ExtResource( 5 )
+
+[node name="ControlCollision5" type="CollisionShape2D" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint5/ControlArea5"]
+shape = SubResource( 2 )
+
+[node name="ControlSprite5" type="Sprite" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint5/ControlArea5"]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 7 )
+hframes = 2
+
+[node name="ControlPoint6" type="RigidBody2D" parent="GameElements/CellMembrane/AmoebaShape"]
 position = Vector2( 40, 138 )
+gravity_scale = 0.0
 
-[node name="ControlArea6" type="Area2D" parent="GameElements/Player/AmoebaShape/ControlPoint6"]
-script = ExtResource( 5 )
-
-[node name="ControlCollision6" type="CollisionShape2D" parent="GameElements/Player/AmoebaShape/ControlPoint6/ControlArea6"]
+[node name="PhysicsCollision6" type="CollisionShape2D" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint6"]
+rotation = 0.785398
+scale = Vector2( 3.5, 1 )
 shape = SubResource( 2 )
 
-[node name="ControlSprite6" type="Sprite" parent="GameElements/Player/AmoebaShape/ControlPoint6/ControlArea6"]
+[node name="ControlArea6" type="Area2D" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint6"]
+script = ExtResource( 5 )
+
+[node name="ControlCollision6" type="CollisionShape2D" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint6/ControlArea6"]
+shape = SubResource( 2 )
+
+[node name="ControlSprite6" type="Sprite" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint6/ControlArea6"]
 scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 3 )
+texture = ExtResource( 7 )
+hframes = 2
 
-[node name="ControlPoint7" type="PathFollow2D" parent="GameElements/Player/AmoebaShape"]
-position = Vector2( -5, 87 )
+[node name="ControlPoint7" type="RigidBody2D" parent="GameElements/CellMembrane/AmoebaShape"]
+position = Vector2( 0, 87 )
+gravity_scale = 0.0
 
-[node name="ControlArea7" type="Area2D" parent="GameElements/Player/AmoebaShape/ControlPoint7"]
+[node name="PhysicsCollision7" type="CollisionShape2D" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint7"]
+position = Vector2( 13, 0 )
+rotation = 1.5708
+scale = Vector2( 3.5, 1 )
+shape = SubResource( 2 )
+
+[node name="ControlArea7" type="Area2D" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint7"]
 position = Vector2( 13, 0 )
 script = ExtResource( 5 )
 
-[node name="ControlCollision7" type="CollisionShape2D" parent="GameElements/Player/AmoebaShape/ControlPoint7/ControlArea7"]
+[node name="ControlCollision7" type="CollisionShape2D" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint7/ControlArea7"]
 shape = SubResource( 2 )
 
-[node name="ControlSprite7" type="Sprite" parent="GameElements/Player/AmoebaShape/ControlPoint7/ControlArea7"]
+[node name="ControlSprite7" type="Sprite" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint7/ControlArea7"]
 scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 3 )
+texture = ExtResource( 7 )
+hframes = 2
 
-[node name="ControlPoint8" type="PathFollow2D" parent="GameElements/Player/AmoebaShape"]
-position = Vector2( 26, 51 )
+[node name="ControlPoint8" type="RigidBody2D" parent="GameElements/CellMembrane/AmoebaShape"]
+position = Vector2( 34, 44 )
+gravity_scale = 0.0
 
-[node name="ControlArea8" type="Area2D" parent="GameElements/Player/AmoebaShape/ControlPoint8"]
+[node name="PhysicsCollision8" type="CollisionShape2D" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint8"]
+rotation = -0.785398
+scale = Vector2( 3.5, 1 )
+shape = SubResource( 2 )
+
+[node name="ControlArea8" type="Area2D" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint8"]
 script = ExtResource( 5 )
 
-[node name="ControlCollision8" type="CollisionShape2D" parent="GameElements/Player/AmoebaShape/ControlPoint8/ControlArea8"]
+[node name="ControlCollision8" type="CollisionShape2D" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint8/ControlArea8"]
 shape = SubResource( 2 )
 
-[node name="ControlSprite8" type="Sprite" parent="GameElements/Player/AmoebaShape/ControlPoint8/ControlArea8"]
+[node name="ControlSprite8" type="Sprite" parent="GameElements/CellMembrane/AmoebaShape/ControlPoint8/ControlArea8"]
 scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 3 )
+texture = ExtResource( 7 )
+hframes = 2
 
-[node name="CollisionArea" type="Area2D" parent="GameElements/Player"]
+[node name="Joint1to2" type="DampedSpringJoint2D" parent="GameElements/CellMembrane/AmoebaShape"]
+position = Vector2( 92, 21 )
+rotation = -1.15541
+node_a = NodePath("../ControlPoint1")
+node_b = NodePath("../ControlPoint2")
+length = 65.0
+rest_length = 65.0
+stiffness = 10.0
+
+[node name="Joint2to3" type="DampedSpringJoint2D" parent="GameElements/CellMembrane/AmoebaShape"]
+position = Vector2( 151, 47 )
+rotation = -0.523599
+node_a = NodePath("../ControlPoint2")
+node_b = NodePath("../ControlPoint3")
+length = 59.0
+rest_length = 59.0
+stiffness = 10.0
+
+[node name="Joint3to4" type="DampedSpringJoint2D" parent="GameElements/CellMembrane/AmoebaShape"]
+position = Vector2( 180, 98 )
+rotation = 0.523599
+node_a = NodePath("../ControlPoint3")
+node_b = NodePath("../ControlPoint4")
+length = 60.0
+rest_length = 60.0
+stiffness = 10.0
+
+[node name="Joint4to5" type="DampedSpringJoint2D" parent="GameElements/CellMembrane/AmoebaShape"]
+position = Vector2( 150, 150 )
+rotation = 1.31772
+scale = Vector2( 1, 1 )
+node_a = NodePath("../ControlPoint4")
+node_b = NodePath("../ControlPoint5")
+length = 60.0
+rest_length = 60.0
+stiffness = 10.0
+
+[node name="Joint5to6" type="DampedSpringJoint2D" parent="GameElements/CellMembrane/AmoebaShape"]
+position = Vector2( 92, 165 )
+rotation = 2.04204
+node_a = NodePath("../ControlPoint5")
+node_b = NodePath("../ControlPoint6")
+length = 59.0
+rest_length = 59.0
+stiffness = 10.0
+
+[node name="Joint6to7" type="DampedSpringJoint2D" parent="GameElements/CellMembrane/AmoebaShape"]
+position = Vector2( 40, 138 )
+rotation = 2.47837
+node_a = NodePath("../ControlPoint6")
+node_b = NodePath("../ControlPoint7")
+length = 65.0
+rest_length = 65.0
+stiffness = 10.0
+
+[node name="Joint7to8" type="DampedSpringJoint2D" parent="GameElements/CellMembrane/AmoebaShape"]
+position = Vector2( 1, 87 )
+rotation = 3.80482
+node_a = NodePath("../ControlPoint7")
+node_b = NodePath("../ControlPoint8")
+length = 55.0
+rest_length = 55.0
+stiffness = 10.0
+
+[node name="Joint8to1" type="DampedSpringJoint2D" parent="GameElements/CellMembrane/AmoebaShape"]
+position = Vector2( 34, 44 )
+rotation = 4.32842
+node_a = NodePath("../ControlPoint8")
+node_b = NodePath("../ControlPoint1")
+length = 62.0
+rest_length = 62.0
+stiffness = 10.0
+
+[node name="CrossBeam8to4" type="DampedSpringJoint2D" parent="GameElements/CellMembrane/AmoebaShape"]
+position = Vector2( 34, 44 )
+rotation = -0.837758
+node_a = NodePath("../ControlPoint8")
+node_b = NodePath("../ControlPoint4")
+length = 157.0
+rest_length = 157.0
+stiffness = 10.0
+
+[node name="CrossBeam2to6" type="DampedSpringJoint2D" parent="GameElements/CellMembrane/AmoebaShape"]
+position = Vector2( 151, 47 )
+rotation = 0.883137
+node_a = NodePath("../ControlPoint2")
+node_b = NodePath("../ControlPoint6")
+length = 144.0
+rest_length = 144.0
+stiffness = 10.0
+
+[node name="CrossBeam1to5" type="DampedSpringJoint2D" parent="GameElements/CellMembrane/AmoebaShape"]
+position = Vector2( 92, 21 )
+node_a = NodePath("../ControlPoint1")
+node_b = NodePath("../ControlPoint5")
+length = 144.0
+rest_length = 144.0
+stiffness = 10.0
+
+[node name="CrossBeam7to3" type="DampedSpringJoint2D" parent="GameElements/CellMembrane/AmoebaShape"]
+position = Vector2( 0, 87 )
+rotation = -1.50971
+node_a = NodePath("../ControlPoint7")
+node_b = NodePath("../ControlPoint5")
+length = 180.0
+rest_length = 180.0
+stiffness = 10.0
+
+[node name="CrossBeam8to6" type="DampedSpringJoint2D" parent="GameElements/CellMembrane/AmoebaShape"]
+position = Vector2( 34, 44 )
+rotation = -0.0645772
+node_a = NodePath("../ControlPoint8")
+node_b = NodePath("../ControlPoint6")
+length = 94.0
+rest_length = 94.0
+stiffness = 10.0
+
+[node name="CrossBeam2to4" type="DampedSpringJoint2D" parent="GameElements/CellMembrane/AmoebaShape"]
+position = Vector2( 151, 47 )
+rotation = 0.00872665
+node_a = NodePath("../ControlPoint2")
+node_b = NodePath("../ControlPoint4")
+length = 103.0
+rest_length = 103.0
+stiffness = 10.0
+
+[node name="CrossBeam8to2" type="DampedSpringJoint2D" parent="GameElements/CellMembrane/AmoebaShape"]
+position = Vector2( 34, 44 )
+rotation = -1.54462
+node_a = NodePath("../ControlPoint8")
+node_b = NodePath("../ControlPoint2")
+length = 117.0
+rest_length = 117.0
+stiffness = 10.0
+
+[node name="CrossBeam6to4" type="DampedSpringJoint2D" parent="GameElements/CellMembrane/AmoebaShape"]
+position = Vector2( 40, 138 )
+rotation = -1.46259
+node_a = NodePath("../ControlPoint6")
+node_b = NodePath("../ControlPoint4")
+length = 110.0
+rest_length = 110.0
+stiffness = 10.0
+
+[node name="CollisionArea" type="Area2D" parent="GameElements/CellMembrane"]
 visible = false
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GameElements/Player/CollisionArea"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GameElements/CellMembrane/CollisionArea"]
 position = Vector2( 5, 6 )
 scale = Vector2( 6.43746, 7.625 )
 polygon = PoolVector2Array( 2.33011, 12.9836, 9.32045, 15.8689, 14.2913, 21.2459, 18.7962, 16.5246, 26.4079, 11.8033, 19.7283, 9.18033, 13.67, 3.67213, 9.00976, 9.18033 )
+
+[node name="OtherOrganelles" type="Node2D" parent="GameElements"]
+position = Vector2( 202, 105 )
+script = ExtResource( 6 )
+
+[node name="Nucleus" type="Sprite" parent="GameElements/OtherOrganelles"]
+texture = ExtResource( 3 )
 
 [node name="GameTimer" type="Timer" parent="."]
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 
-[connection signal="control_pressed" from="GameElements/Player/AmoebaShape/ControlPoint1/ControlArea1" to="GameElements/Player" method="_on_ControlArea_control_pressed"]
-[connection signal="control_pressed" from="GameElements/Player/AmoebaShape/ControlPoint2/ControlArea2" to="GameElements/Player" method="_on_ControlArea_control_pressed"]
-[connection signal="control_pressed" from="GameElements/Player/AmoebaShape/ControlPoint3/ControlArea3" to="GameElements/Player" method="_on_ControlArea_control_pressed"]
-[connection signal="control_pressed" from="GameElements/Player/AmoebaShape/ControlPoint4/ControlArea4" to="GameElements/Player" method="_on_ControlArea_control_pressed"]
-[connection signal="control_pressed" from="GameElements/Player/AmoebaShape/ControlPoint5/ControlArea5" to="GameElements/Player" method="_on_ControlArea_control_pressed"]
-[connection signal="control_pressed" from="GameElements/Player/AmoebaShape/ControlPoint6/ControlArea6" to="GameElements/Player" method="_on_ControlArea_control_pressed"]
-[connection signal="control_pressed" from="GameElements/Player/AmoebaShape/ControlPoint7/ControlArea7" to="GameElements/Player" method="_on_ControlArea_control_pressed"]
-[connection signal="control_pressed" from="GameElements/Player/AmoebaShape/ControlPoint8/ControlArea8" to="GameElements/Player" method="_on_ControlArea_control_pressed"]
+[connection signal="control_pressed" from="GameElements/CellMembrane/AmoebaShape/ControlPoint1/ControlArea1" to="GameElements/CellMembrane" method="_on_ControlArea_control_pressed"]
+[connection signal="control_released" from="GameElements/CellMembrane/AmoebaShape/ControlPoint1/ControlArea1" to="GameElements/CellMembrane" method="_on_ControlArea_control_released"]
+[connection signal="control_pressed" from="GameElements/CellMembrane/AmoebaShape/ControlPoint2/ControlArea2" to="GameElements/CellMembrane" method="_on_ControlArea_control_pressed"]
+[connection signal="control_released" from="GameElements/CellMembrane/AmoebaShape/ControlPoint2/ControlArea2" to="GameElements/CellMembrane" method="_on_ControlArea_control_released"]
+[connection signal="control_pressed" from="GameElements/CellMembrane/AmoebaShape/ControlPoint3/ControlArea3" to="GameElements/CellMembrane" method="_on_ControlArea_control_pressed"]
+[connection signal="control_released" from="GameElements/CellMembrane/AmoebaShape/ControlPoint3/ControlArea3" to="GameElements/CellMembrane" method="_on_ControlArea_control_released"]
+[connection signal="control_pressed" from="GameElements/CellMembrane/AmoebaShape/ControlPoint4/ControlArea4" to="GameElements/CellMembrane" method="_on_ControlArea_control_pressed"]
+[connection signal="control_released" from="GameElements/CellMembrane/AmoebaShape/ControlPoint4/ControlArea4" to="GameElements/CellMembrane" method="_on_ControlArea_control_released"]
+[connection signal="control_pressed" from="GameElements/CellMembrane/AmoebaShape/ControlPoint5/ControlArea5" to="GameElements/CellMembrane" method="_on_ControlArea_control_pressed"]
+[connection signal="control_released" from="GameElements/CellMembrane/AmoebaShape/ControlPoint5/ControlArea5" to="GameElements/CellMembrane" method="_on_ControlArea_control_released"]
+[connection signal="control_pressed" from="GameElements/CellMembrane/AmoebaShape/ControlPoint6/ControlArea6" to="GameElements/CellMembrane" method="_on_ControlArea_control_pressed"]
+[connection signal="control_released" from="GameElements/CellMembrane/AmoebaShape/ControlPoint6/ControlArea6" to="GameElements/CellMembrane" method="_on_ControlArea_control_released"]
+[connection signal="control_pressed" from="GameElements/CellMembrane/AmoebaShape/ControlPoint7/ControlArea7" to="GameElements/CellMembrane" method="_on_ControlArea_control_pressed"]
+[connection signal="control_released" from="GameElements/CellMembrane/AmoebaShape/ControlPoint7/ControlArea7" to="GameElements/CellMembrane" method="_on_ControlArea_control_released"]
+[connection signal="control_pressed" from="GameElements/CellMembrane/AmoebaShape/ControlPoint8/ControlArea8" to="GameElements/CellMembrane" method="_on_ControlArea_control_pressed"]
+[connection signal="control_released" from="GameElements/CellMembrane/AmoebaShape/ControlPoint8/ControlArea8" to="GameElements/CellMembrane" method="_on_ControlArea_control_released"]
