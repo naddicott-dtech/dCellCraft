@@ -1,11 +1,11 @@
 extends Node2D
 
-var amplitude = 20.0
-var target_amplitude = 25.0
+var amplitude = 10.0
+var target_amplitude = 12.0
 var amplitude_change_speed = 0.5 # Adjust this for faster or slower transitions
-#var frequency = 0.3
-#var target_frequency = 0.5 # This can be adjusted based on your desired effect
-#var frequency_change_speed = 0.1 # Adjust this for faster or slower transitions
+var frequency = 0.3
+var target_frequency = 0.5 # This can be adjusted based on your desired effect
+var frequency_change_speed = 0.1 # Adjust this for faster or slower transitions
 var time_passed = 0.0
 var osc_speed = 0.1
 var noise = OpenSimplexNoise.new() # Godot has built-in Simplex noise  
@@ -15,7 +15,7 @@ var noise_period_change_speed = 0.005 # Adjust this for faster or slower transit
 var is_control_pressed = false #track mousedown state
 var last_control_pressed = null
 var initial_mouse_position: Vector2 = Vector2()
-var max_impulse_strength: float = 200.0 #Adjust based on your needs
+var max_impulse_strength: float = 400.0 #Adjust based on your needs
 var impulse_active = false
 var impulse_done_distance = 15.0
 var distance_per_ATP = 10
@@ -34,8 +34,14 @@ func add_wavy_points(new_curve, point1, point2, num_intermediate_points, time):
 	for i in range(1, num_intermediate_points + 1):
 		var t = i * step
 		var base_point = point1.linear_interpolate(point2, t)
-		var offset_value = noise.get_noise_2d(base_point.x + time, base_point.y + time)
-		var offset = Vector2(offset_value * amplitude, offset_value * amplitude)
+#		var offset_value = noise.get_noise_2d(base_point.x + time, base_point.y + time)
+#		var offset = Vector2(offset_value * amplitude, offset_value * amplitude) #noise approach
+		var angle = (base_point.x * time * osc_speed) * frequency
+		var offset_value = amplitude * sin(angle)
+		 
+		#get perpendicular
+		var offset = Vector2(0, offset_value)
+		
 		var wavy_point = base_point + offset
 		new_curve.add_point(wavy_point)
 
@@ -205,8 +211,8 @@ func _process(delta):
 	if impulse_active == false:	#make the amoeba more undulating when it's not getting free undulation from movement
 		if fmod(time_passed, change_interval) < delta: #we've just passed an interval
 			target_noise_period = rand_range(0.7, 0.8)
-			target_amplitude = rand_range(20.0, 25.0)
-#			target_frequency = rand_range(0.3, 0.5)
+			target_amplitude = rand_range(10.0, 12.0)
+			target_frequency = rand_range(0.3, 0.5)
 			# more target shifts here
 	
 		# Adjust amplitude towards target
@@ -220,14 +226,14 @@ func _process(delta):
 				amplitude = target_amplitude
 
 		# Adjust frequency towards target
-#		if frequency < target_frequency:
-#			frequency += frequency_change_speed * delta
-#			if frequency > target_frequency:
-#				frequency = target_frequency
-#		elif frequency > target_frequency:
-#			frequency -= frequency_change_speed * delta
-#			if frequency < target_frequency:
-#				frequency = target_frequency
+		if frequency < target_frequency:
+			frequency += frequency_change_speed * delta
+			if frequency > target_frequency:
+				frequency = target_frequency
+		elif frequency > target_frequency:
+			frequency -= frequency_change_speed * delta
+			if frequency < target_frequency:
+				frequency = target_frequency
 		
 		# Adjust noise period towards target
 		if noise_period < target_noise_period:
