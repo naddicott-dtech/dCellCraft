@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scenes/Main/Prototype.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Backgrounds/TerrainSprite_PetriDish_Green.png" type="Texture" id=2]
@@ -12,6 +12,9 @@
 [ext_resource path="res://Scenes/Main/ATPDisplay.gd" type="Script" id=10]
 [ext_resource path="res://Scenes/Main/ATPMargin.gd" type="Script" id=11]
 [ext_resource path="res://Scenes/Main/ImpulseArrow.gd" type="Script" id=12]
+[ext_resource path="res://Scenes/Main/Zone.gd" type="Script" id=13]
+[ext_resource path="res://Scenes/Main/ZoneCollision.gd" type="Script" id=14]
+[ext_resource path="res://Scenes/Main/GlucoseDisplay.gd" type="Script" id=15]
 
 [sub_resource type="Curve2D" id=3]
 _data = {
@@ -19,6 +22,9 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id=2]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 237, 215.625 )
 
 [node name="MissionPrototype" type="Node2D"]
 script = ExtResource( 1 )
@@ -39,10 +45,21 @@ margin_top = 13.0
 margin_bottom = 27.0
 script = ExtResource( 10 )
 
+[node name="GlucoseMargin" type="MarginContainer" parent="UI/TopMenuContainer"]
+margin_left = 4.0
+margin_right = 4.0
+margin_bottom = 40.0
+script = ExtResource( 11 )
+
+[node name="GlucoseDisplay" type="Label" parent="UI/TopMenuContainer/GlucoseMargin"]
+margin_top = 13.0
+margin_bottom = 27.0
+script = ExtResource( 15 )
+
 [node name="PauseButton" type="Button" parent="UI/TopMenuContainer"]
 pause_mode = 2
-margin_left = 4.0
-margin_right = 54.0
+margin_left = 8.0
+margin_right = 58.0
 margin_bottom = 40.0
 text = "Pause"
 script = ExtResource( 9 )
@@ -53,7 +70,7 @@ pause_mode = 1
 [node name="MovingBackground" type="Node2D" parent="GameElements"]
 
 [node name="BackgroundImage" type="Sprite" parent="GameElements/MovingBackground"]
-position = Vector2( 498, 448 )
+position = Vector2( 500, 450 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 2 )
 
@@ -398,6 +415,154 @@ texture = ExtResource( 3 )
 [node name="CustomCamera" type="Node2D" parent="GameElements"]
 position = Vector2( 202, 105 )
 script = ExtResource( 8 )
+
+[node name="Zones" type="Node2D" parent="GameElements"]
+
+[node name="Zone_0_0" type="Area2D" parent="GameElements/Zones"]
+position = Vector2( -125, -150 )
+script = ExtResource( 13 )
+
+[node name="ZoneCollision_0_0" type="CollisionShape2D" parent="GameElements/Zones/Zone_0_0"]
+z_as_relative = false
+shape = SubResource( 4 )
+script = ExtResource( 14 )
+
+[node name="Zone_0_1" type="Area2D" parent="GameElements/Zones"]
+position = Vector2( 375, -150 )
+script = ExtResource( 13 )
+
+[node name="ZoneCollision_0_1" type="CollisionShape2D" parent="GameElements/Zones/Zone_0_1"]
+z_as_relative = false
+shape = SubResource( 4 )
+script = ExtResource( 14 )
+
+[node name="Zone_0_2" type="Area2D" parent="GameElements/Zones"]
+position = Vector2( 875, -150 )
+script = ExtResource( 13 )
+
+[node name="ZoneCollision_0_2" type="CollisionShape2D" parent="GameElements/Zones/Zone_0_2"]
+z_as_relative = false
+shape = SubResource( 4 )
+script = ExtResource( 14 )
+
+[node name="Zone_0_3" type="Area2D" parent="GameElements/Zones"]
+position = Vector2( 1375, -150 )
+script = ExtResource( 13 )
+
+[node name="ZoneCollision_0_3" type="CollisionShape2D" parent="GameElements/Zones/Zone_0_3"]
+z_as_relative = false
+shape = SubResource( 4 )
+script = ExtResource( 14 )
+
+[node name="Zone_1_0" type="Area2D" parent="GameElements/Zones"]
+position = Vector2( -125, 350 )
+script = ExtResource( 13 )
+
+[node name="ZoneCollision_1_0" type="CollisionShape2D" parent="GameElements/Zones/Zone_1_0"]
+z_as_relative = false
+shape = SubResource( 4 )
+script = ExtResource( 14 )
+
+[node name="Zone_1_1" type="Area2D" parent="GameElements/Zones"]
+position = Vector2( 375, 350 )
+script = ExtResource( 13 )
+
+[node name="ZoneCollision_1_1" type="CollisionShape2D" parent="GameElements/Zones/Zone_1_1"]
+z_as_relative = false
+shape = SubResource( 4 )
+script = ExtResource( 14 )
+
+[node name="Zone_1_2" type="Area2D" parent="GameElements/Zones"]
+position = Vector2( 875, 350 )
+script = ExtResource( 13 )
+
+[node name="ZoneCollision_1_2" type="CollisionShape2D" parent="GameElements/Zones/Zone_1_2"]
+z_as_relative = false
+shape = SubResource( 4 )
+script = ExtResource( 14 )
+
+[node name="Zone_1_3" type="Area2D" parent="GameElements/Zones"]
+position = Vector2( 1375, 350 )
+script = ExtResource( 13 )
+
+[node name="ZoneCollision_1_3" type="CollisionShape2D" parent="GameElements/Zones/Zone_1_3"]
+z_as_relative = false
+shape = SubResource( 4 )
+script = ExtResource( 14 )
+
+[node name="Zone_2_0" type="Area2D" parent="GameElements/Zones"]
+position = Vector2( -125, 850 )
+script = ExtResource( 13 )
+
+[node name="ZoneCollision_2_0" type="CollisionShape2D" parent="GameElements/Zones/Zone_2_0"]
+z_as_relative = false
+shape = SubResource( 4 )
+script = ExtResource( 14 )
+
+[node name="Zone_2_1" type="Area2D" parent="GameElements/Zones"]
+position = Vector2( 375, 850 )
+script = ExtResource( 13 )
+
+[node name="ZoneCollision_2_1" type="CollisionShape2D" parent="GameElements/Zones/Zone_2_1"]
+z_as_relative = false
+shape = SubResource( 4 )
+script = ExtResource( 14 )
+
+[node name="Zone_2_2" type="Area2D" parent="GameElements/Zones"]
+position = Vector2( 875, 850 )
+script = ExtResource( 13 )
+
+[node name="ZoneCollision_2_2" type="CollisionShape2D" parent="GameElements/Zones/Zone_2_2"]
+z_as_relative = false
+shape = SubResource( 4 )
+script = ExtResource( 14 )
+
+[node name="Zone_2_3" type="Area2D" parent="GameElements/Zones"]
+position = Vector2( 1375, 850 )
+script = ExtResource( 13 )
+
+[node name="ZoneCollision_2_3" type="CollisionShape2D" parent="GameElements/Zones/Zone_2_3"]
+z_as_relative = false
+shape = SubResource( 4 )
+script = ExtResource( 14 )
+
+[node name="Zone_3_0" type="Area2D" parent="GameElements/Zones"]
+position = Vector2( -125, 1350 )
+script = ExtResource( 13 )
+
+[node name="ZoneCollision_3_0" type="CollisionShape2D" parent="GameElements/Zones/Zone_3_0"]
+z_as_relative = false
+shape = SubResource( 4 )
+script = ExtResource( 14 )
+
+[node name="Zone_3_1" type="Area2D" parent="GameElements/Zones"]
+position = Vector2( 375, 1350 )
+script = ExtResource( 13 )
+
+[node name="ZoneCollision_3_1" type="CollisionShape2D" parent="GameElements/Zones/Zone_3_1"]
+z_as_relative = false
+shape = SubResource( 4 )
+script = ExtResource( 14 )
+
+[node name="Zone_3_2" type="Area2D" parent="GameElements/Zones"]
+position = Vector2( 875, 1350 )
+script = ExtResource( 13 )
+
+[node name="ZoneCollision_3_2" type="CollisionShape2D" parent="GameElements/Zones/Zone_3_2"]
+z_as_relative = false
+shape = SubResource( 4 )
+script = ExtResource( 14 )
+
+[node name="Zone_3_3" type="Area2D" parent="GameElements/Zones"]
+position = Vector2( 1375, 1350 )
+script = ExtResource( 13 )
+
+[node name="ZoneCollision_3_3" type="CollisionShape2D" parent="GameElements/Zones/Zone_3_3"]
+z_as_relative = false
+shape = SubResource( 4 )
+script = ExtResource( 14 )
+
+[node name="Pickups" type="Node2D" parent="GameElements"]
 
 [node name="GameTimer" type="Timer" parent="."]
 

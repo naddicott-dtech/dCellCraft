@@ -8,7 +8,7 @@ func _ready():
 	Global.ATP = 700
 
 
-func _process(delta):
+func _process(_delta):
 	# Game logic here
 	pass
 

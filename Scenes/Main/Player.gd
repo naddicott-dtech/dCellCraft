@@ -18,7 +18,7 @@ var initial_mouse_position: Vector2 = Vector2()
 var max_impulse_strength: float = 200.0 #Adjust based on your needs
 var impulse_active = false
 var impulse_done_distance = 15.0
-var distance_per_ATP = 20
+var distance_per_ATP = 10
 var initial_COM = Vector2()
 var previous_COM = Vector2()
   

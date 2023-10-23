@@ -6,6 +6,9 @@ extends Node2D
 
 func _ready():
 	Global.ATP = 500
+	Global.Glucose_Spawn_Rate = 0.1
+	Global.Glucose_Spawn_Count = 0 
+	Global.Glucose_Max_Spawn = 150
 
 
 func _process(_delta):
