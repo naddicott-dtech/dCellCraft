@@ -44,7 +44,7 @@ func _initialize_spacial_data():
 
 func _on_Zone_body_entered(body: PhysicsBody2D):
 	if body is RigidBody2D and not zone_populated:
-		print("player entered zone " + str(x_grid_coord) + ", " + str(y_grid_coord))
+		#print("player entered zone " + str(x_grid_coord) + ", " + str(y_grid_coord))
 		_populate_Zone()
 		zone_populated = true # To prevent multiple resource spawns
 

@@ -412,7 +412,11 @@ script = ExtResource( 6 )
 [node name="Nucleus" type="Sprite" parent="GameElements/OtherOrganelles"]
 texture = ExtResource( 3 )
 
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="GameElements/OtherOrganelles"]
+remote_path = NodePath("../../Camera2D")
+
 [node name="CustomCamera" type="Node2D" parent="GameElements"]
+visible = false
 position = Vector2( 202, 105 )
 script = ExtResource( 8 )
 
@@ -563,6 +567,11 @@ shape = SubResource( 4 )
 script = ExtResource( 14 )
 
 [node name="Pickups" type="Node2D" parent="GameElements"]
+
+[node name="Camera2D" type="Camera2D" parent="GameElements"]
+position = Vector2( 202, 105 )
+current = true
+smoothing_enabled = true
 
 [node name="GameTimer" type="Timer" parent="."]
 

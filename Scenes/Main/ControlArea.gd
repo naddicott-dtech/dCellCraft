@@ -14,7 +14,7 @@ onready var control_collision = get_node("ControlCollision" + name.replace("Cont
 
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
-		var real_pos = get_global_mouse_position()
+		var real_pos = get_global_mouse_position() #this solved an added camera messing up inputs.
 		var distance_to_center = real_pos.distance_to(control_collision.global_position)
 		if event.pressed:
 			if distance_to_center <= control_collision.shape.radius:
