@@ -16,14 +16,14 @@ func _ready() -> void:
 	self.z_index = 2  # Set to a higher value than cell membrane
 	
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# get the center of mass from the CellMembrane's control points
 	var com = compute_center_of_mass()
 	
 	#update OtherOrganelle's position to match the COM
 	global_position = com
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	pass
 	
 func compute_center_of_mass():

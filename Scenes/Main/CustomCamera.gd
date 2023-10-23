@@ -18,7 +18,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if target:
 		# Calculate the desired position
 		var desired_position = -target.global_position + get_viewport().size * 0.5
@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 		# Adjust the viewport's canvas transform
 		get_viewport().canvas_transform.origin = position
 		
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	pass
 
 func get_zoom() -> Vector2:

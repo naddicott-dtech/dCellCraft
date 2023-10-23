@@ -34,8 +34,14 @@ func _input(event):
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# self.set_process_unhandled_key_input(true)
-	connect("mouse_entered", self, "_on_ControlArea_mouse_entered")
-	connect("mouse_exited", self, "_on_ControlArea_mouse_exited")
+#	var err = connect("mouse_entered", self, "_on_ControlArea_mouse_entered")
+#	if err != OK:
+#		print("connect Failure!")
+#
+#	err = connect("mouse_exited", self, "_on_ControlArea_mouse_exited")
+#	if err != OK:
+#		print("connect Failure!")	
+	pass
 	
 
 

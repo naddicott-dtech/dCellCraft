@@ -12,7 +12,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	#update the label to show the current value of Global.ATP
 	self.text = "%s ATP" % Global.ATP
 	if Global.ATP == 0:

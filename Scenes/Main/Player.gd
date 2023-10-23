@@ -29,7 +29,7 @@ onready var arrowhead = $AmoebaShape/ArrowHead
 onready var ATPCostLabel = $AmoebaShape/ArrowHead/ATPCostLabel
 var control_points_names = ["ControlPoint1", "ControlPoint2", "ControlPoint3", "ControlPoint4", "ControlPoint5", "ControlPoint6", "ControlPoint7", "ControlPoint8"]
 
-func add_wavy_points(curve, point1, point2, num_intermediate_points, time):
+func add_wavy_points(new_curve, point1, point2, num_intermediate_points, time):
 	var step = 1.0 / (num_intermediate_points + 1)
 	for i in range(1, num_intermediate_points + 1):
 		var t = i * step
@@ -37,7 +37,7 @@ func add_wavy_points(curve, point1, point2, num_intermediate_points, time):
 		var offset_value = noise.get_noise_2d(base_point.x + time, base_point.y + time)
 		var offset = Vector2(offset_value * amplitude, offset_value * amplitude)
 		var wavy_point = base_point + offset
-		curve.add_point(wavy_point)
+		new_curve.add_point(wavy_point)
 
 func update_arrowhead():
 	#compute direction of the arrow
@@ -272,8 +272,8 @@ func _process(delta):
 
 func _draw():
 	#print("Entering _draw function")  # Debug message
-	var amoeba_shape = $AmoebaShape  # Adjusted the path
-	var curve = amoeba_shape.curve
+	#var amoeba_shape = $AmoebaShape  # Adjusted the path
+	#var curve = amoeba_shape.curve
 	#var length = curve.get_baked_length()
 	#print("Curve baked length: ", length)  # Debug message
 	

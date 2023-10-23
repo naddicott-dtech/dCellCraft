@@ -5,10 +5,10 @@ extends Node2D
 # var b = "text"
 
 func _ready():
-	Global.ATP = 50
+	Global.ATP = 500
 
 
-func _process(delta):
+func _process(_delta):
 	# Game logic here
 	pass
 
