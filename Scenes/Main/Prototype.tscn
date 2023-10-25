@@ -333,6 +333,7 @@ node_a = NodePath("../ControlPoint8")
 node_b = NodePath("../ControlPoint4")
 length = 157.0
 rest_length = 157.0
+stiffness = 10.0
 
 [node name="CrossBeam2to6" type="DampedSpringJoint2D" parent="GameElements/CellMembrane/AmoebaShape"]
 position = Vector2( 151, 47 )
@@ -341,6 +342,7 @@ node_a = NodePath("../ControlPoint2")
 node_b = NodePath("../ControlPoint6")
 length = 144.0
 rest_length = 144.0
+stiffness = 10.0
 
 [node name="CrossBeam1to5" type="DampedSpringJoint2D" parent="GameElements/CellMembrane/AmoebaShape"]
 position = Vector2( 92, 21 )
@@ -348,6 +350,7 @@ node_a = NodePath("../ControlPoint1")
 node_b = NodePath("../ControlPoint5")
 length = 144.0
 rest_length = 144.0
+stiffness = 10.0
 
 [node name="CrossBeam7to3" type="DampedSpringJoint2D" parent="GameElements/CellMembrane/AmoebaShape"]
 position = Vector2( 0, 87 )
@@ -356,6 +359,7 @@ node_a = NodePath("../ControlPoint7")
 node_b = NodePath("../ControlPoint5")
 length = 180.0
 rest_length = 180.0
+stiffness = 10.0
 
 [node name="CrossBeam8to6" type="DampedSpringJoint2D" parent="GameElements/CellMembrane/AmoebaShape"]
 position = Vector2( 34, 44 )
@@ -364,6 +368,7 @@ node_a = NodePath("../ControlPoint8")
 node_b = NodePath("../ControlPoint6")
 length = 94.0
 rest_length = 94.0
+stiffness = 10.0
 
 [node name="CrossBeam2to4" type="DampedSpringJoint2D" parent="GameElements/CellMembrane/AmoebaShape"]
 position = Vector2( 151, 47 )
@@ -372,6 +377,7 @@ node_a = NodePath("../ControlPoint2")
 node_b = NodePath("../ControlPoint4")
 length = 103.0
 rest_length = 103.0
+stiffness = 10.0
 
 [node name="CrossBeam8to2" type="DampedSpringJoint2D" parent="GameElements/CellMembrane/AmoebaShape"]
 position = Vector2( 34, 44 )
@@ -380,6 +386,7 @@ node_a = NodePath("../ControlPoint8")
 node_b = NodePath("../ControlPoint2")
 length = 117.0
 rest_length = 117.0
+stiffness = 10.0
 
 [node name="CrossBeam6to4" type="DampedSpringJoint2D" parent="GameElements/CellMembrane/AmoebaShape"]
 position = Vector2( 40, 138 )
@@ -388,6 +395,7 @@ node_a = NodePath("../ControlPoint6")
 node_b = NodePath("../ControlPoint4")
 length = 110.0
 rest_length = 110.0
+stiffness = 10.0
 
 [node name="CollisionArea" type="Area2D" parent="GameElements/CellMembrane"]
 visible = false

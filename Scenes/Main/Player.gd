@@ -86,18 +86,29 @@ func _on_ControlArea_control_released(control_node) -> void:
 		#Limit the impulse strength to maximum value
 		if impulse_strength > max_impulse_strength:
 			mouse_delta = mouse_delta.normalized() * max_impulse_strength
-			
-		#Pay the ATP (and limit again if needed)	
-		var ATPCost = mouse_delta.length() / distance_per_ATP
-		if ATPCost > Global.ATP:
-			mouse_delta = (Global.ATP / ATPCost) * mouse_delta
-			Global.ATP = 0
-		else: # have enough to pay
-			Global.ATP -= round(ATPCost)
+		
+		#compute the angle towards the mouse from the center of mass
+		var dir_to_mouse = (mouse_position - center_of_mass).normalized()
+		var angle_to_mouse = atan2(dir_to_mouse.y, dir_to_mouse.x)
+		
+		var dir_to_com_from_control = (center_of_mass - control_node.global_position).normalized()
+		var facing_center_of_mass_angle = atan2(dir_to_com_from_control.y, dir_to_com_from_control.x)
+		
+		#check if the angle is within the allowed range (270 degrees away)
+		var lower_bound = facing_center_of_mass_angle - deg2rad(45)
+		var upper_bound = facing_center_of_mass_angle + deg2rad(45)
+		if angle_to_mouse < lower_bound or angle_to_mouse > upper_bound: #not facing center of mass
+			#Pay the ATP (and limit again if needed)	
+			var ATPCost = mouse_delta.length() / distance_per_ATP
+			if ATPCost > Global.ATP:
+				mouse_delta = (Global.ATP / ATPCost) * mouse_delta
+				Global.ATP = 0
+			else: # have enough to pay
+				Global.ATP -= round(ATPCost)
 		# get the control point and apply the impulse
-		var control_point = control_node.get_parent()
-		control_point.apply_impulse(Vector2(), mouse_delta) #apply the impulse
-		impulse_active = true
+			var control_point = control_node.get_parent()
+			control_point.apply_impulse(Vector2(), mouse_delta) #apply the impulse
+			impulse_active = true
 		
 	
 
@@ -211,8 +222,8 @@ func _process(delta):
 	if impulse_active == false:	#make the amoeba more undulating when it's not getting free undulation from movement
 		if fmod(time_passed, change_interval) < delta: #we've just passed an interval
 			target_noise_period = rand_range(0.7, 0.8)
-			target_amplitude = rand_range(10.0, 12.0)
-			target_frequency = rand_range(0.3, 0.5)
+			target_amplitude = rand_range(5.0, 10.0)
+			target_frequency = rand_range(0.1, 0.3)
 			# more target shifts here
 	
 		# Adjust amplitude towards target
@@ -247,6 +258,8 @@ func _process(delta):
 
 		noise.set_period(noise_period)
 	else: #imuplse active true
+		frequency = 0.1 #just trying something out
+		amplitude = 2.0
 		#check to see if impulse is over
 		if fmod(time_passed, change_interval) < delta:		
 			var current_COM = compute_center_of_mass()

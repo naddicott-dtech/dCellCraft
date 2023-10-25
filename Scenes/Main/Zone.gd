@@ -43,10 +43,17 @@ func _initialize_spacial_data():
 			spatial_data.append(point_data)
 
 func _on_Zone_body_entered(body: PhysicsBody2D):
-	if body is RigidBody2D and not zone_populated:
+	if body is RigidBody2D:
+		var current_zone = [x_grid_coord, y_grid_coord]
+		#check if current zone is NOT in the last four zones visited
+		if not Global.check_zone_in_recent(current_zone):
+			_populate_Zone()
+			zone_populated = true
+			Global.add_zone_to_recent(current_zone)
+		elif not zone_populated: # in the last 4, but maybe not populated yet? - probably not possible
+			_populate_Zone()
+			zone_populated = true
 		#print("player entered zone " + str(x_grid_coord) + ", " + str(y_grid_coord))
-		_populate_Zone()
-		zone_populated = true # To prevent multiple resource spawns
 
 func _populate_Zone():
 	for point_data in spatial_data:
