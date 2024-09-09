@@ -9,6 +9,8 @@ func _ready():
 	Global.Glucose_Spawn_Rate = 0.1
 	Global.Glucose_Spawn_Count = 0 
 	Global.Glucose_Max_Spawn = 150
+	
+	Global.organelles_unlocked["Mitochondria"] = true
 
 
 func _process(_delta):

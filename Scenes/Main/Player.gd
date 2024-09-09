@@ -105,10 +105,12 @@ func _on_ControlArea_control_released(control_node) -> void:
 				Global.ATP = 0
 			else: # have enough to pay
 				Global.ATP -= round(ATPCost)
+				#Objective logic goes here (ATP spending objectives)
 		# get the control point and apply the impulse
 			var control_point = control_node.get_parent()
 			control_point.apply_impulse(Vector2(), mouse_delta) #apply the impulse
 			impulse_active = true
+			#Objective logic goes here (movement related objectives)
 		
 	
 
@@ -148,6 +150,7 @@ func _ready():
 	amoeba_shape.curve = curve
 	initial_COM = compute_center_of_mass()
 	previous_COM = initial_COM
+	#Objective logic goes here (objective initialization)
 	update()
 #	for i in range(1, 9):
 #		var start_point = $AmoebaShape.get_node("ControlPoint" + str(i)).position
@@ -268,6 +271,7 @@ func _process(delta):
 			if distance < impulse_done_distance:
 				impulse_active = false
 				#print("impulse over")
+				#Objective logic goes here (move a given distance ojbectives)
 			previous_COM = current_COM # compare distance for next time
 		
 	# Clear the existing points from the curve and re-add them with the new undulation
@@ -286,6 +290,7 @@ func _process(delta):
 		add_wavy_points(curve, current_point, next_point, 3, time_passed)
 	curve.add_point(control_points_positions[0])
 	
+	#Objective logic goes here (Amoeba shape or size objectives)
 	# Trigger the _draw() method to render the updated curve
 	update()
 

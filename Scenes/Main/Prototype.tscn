@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scenes/Main/Prototype.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Backgrounds/TerrainSprite_PetriDish_Green.png" type="Texture" id=2]
@@ -15,6 +15,9 @@
 [ext_resource path="res://Scenes/Main/Zone.gd" type="Script" id=13]
 [ext_resource path="res://Scenes/Main/ZoneCollision.gd" type="Script" id=14]
 [ext_resource path="res://Scenes/Main/GlucoseDisplay.gd" type="Script" id=15]
+[ext_resource path="res://Scenes/Main/RespirationTimer.gd" type="Script" id=16]
+[ext_resource path="res://Assets/Sprites/Mitochondrion1.png" type="Texture" id=17]
+[ext_resource path="res://Scenes/Main/Mitochondria.gd" type="Script" id=18]
 
 [sub_resource type="Curve2D" id=3]
 _data = {
@@ -409,11 +412,24 @@ polygon = PoolVector2Array( 2.33011, 12.9836, 9.32045, 15.8689, 14.2913, 21.2459
 position = Vector2( 202, 105 )
 script = ExtResource( 6 )
 
+[node name="RespirationTimer" type="Timer" parent="GameElements/OtherOrganelles"]
+wait_time = 4.0
+autostart = true
+script = ExtResource( 16 )
+
 [node name="Nucleus" type="Sprite" parent="GameElements/OtherOrganelles"]
 texture = ExtResource( 3 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="GameElements/OtherOrganelles"]
 remote_path = NodePath("../../Camera2D")
+
+[node name="Mitochondria" type="Node2D" parent="GameElements/OtherOrganelles"]
+script = ExtResource( 18 )
+
+[node name="Sprite" type="Sprite" parent="GameElements/OtherOrganelles/Mitochondria"]
+position = Vector2( 52, -13 )
+scale = Vector2( 0.015, 0.015 )
+texture = ExtResource( 17 )
 
 [node name="CustomCamera" type="Node2D" parent="GameElements"]
 visible = false
@@ -594,3 +610,4 @@ smoothing_enabled = true
 [connection signal="control_released" from="GameElements/CellMembrane/AmoebaShape/ControlPoint7/ControlArea7" to="GameElements/CellMembrane" method="_on_ControlArea_control_released"]
 [connection signal="control_pressed" from="GameElements/CellMembrane/AmoebaShape/ControlPoint8/ControlArea8" to="GameElements/CellMembrane" method="_on_ControlArea_control_pressed"]
 [connection signal="control_released" from="GameElements/CellMembrane/AmoebaShape/ControlPoint8/ControlArea8" to="GameElements/CellMembrane" method="_on_ControlArea_control_released"]
+[connection signal="metabolism_tick" from="GameElements/OtherOrganelles/RespirationTimer" to="GameElements/OtherOrganelles/Mitochondria" method="_on_RespirationTimer_metabolism_tick"]
